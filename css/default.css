@@ -1,0 +1,2387 @@
+@-ms-viewport {
+        width: device-width;
+        height: device-height;
+}
+
+@font-face {
+        font-family: 'Hobo Std';
+        src: url(../assets/fonts/hobo_becker_regular.ttf);
+}
+
+canvas#gameCanvas {
+        display: block;
+        z-index: -15;
+}
+
+body,
+html {
+        width: 100%;
+        height: 100%;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+        background-size: 100%;
+        -ms-touch-action: none;
+}
+
+
+/*
+body{
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	margin:0;
+	padding:0;
+	*/
+
+
+/* normalde browser üzerinde sadece zoom in ve zoom out işlemleri için touch eventleri çalışır*/
+
+
+/* bu kod ile birlikte bizim tarafımızdan da touch event gönderilmesini sağlıyoruz ve bu pan and zoom gibi eventleri iptal ediyoruz*/
+
+
+/*
+}
+*/
+
+span.backgroundBack {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-image: url(../assets/bg_back.png);
+        background-size: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        z-index: -30;
+}
+
+span.backgroundFront {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 30;
+        background-image: url(../assets/bg_front.png);
+        background-size: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+}
+
+span.logo {
+        position: absolute;
+        display: block;
+        /*width:545px;
+	height:233px;
+	top:150px;
+	left:550px;*/
+        top: 5%;
+        left: 32%;
+        width: 100%;
+        height: 100%;
+        z-index: 20;
+        background-image: url(../assets/logo.png);
+        background-repeat: no-repeat;
+        background-size: auto 35%;
+}
+
+a.playMenuButton {
+        display: block;
+        position: absolute;
+        /*top:450px;
+	left:650px;*/
+        top: 50%;
+        left: 38%;
+        width: 20%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/play_button.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation*/
+        -webkit-animation: mainMenu_ScaleFrom0To1 1s linear 0s infinite normal;
+        -moz-animation: mainMenu_ScaleFrom0To1 1s linear 0s infinite normal;
+        -ms-animation: mainMenu_ScaleFrom0To1 1s linear 0s infinite normal;
+        -o-animation: mainMenu_ScaleFrom0To1 1s linear 0s infinite normal;
+        animation: mainMenu_ScaleFrom0To1 1s linear 0s infinite normal;
+}
+
+a.playMenuButton:hover {
+        background-image: url(../assets/buttons/play_button_h.png);
+}
+
+
+/* For Safari and Chrome */
+
+@-webkit-keyframes mainMenu_ScaleFrom0To1 {
+        from {
+                /*transform*/
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -ms-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+        }
+
+        50% {
+                /*transform*/
+                -webkit-transform: scale(1.2);
+                -moz-transform: scale(1.2);
+                -ms-transform: scale(1.2);
+                -o-transform: scale(1.2);
+                transform: scale(1.2);
+        }
+
+        to {
+                /*transform*/
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -ms-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+        }
+}
+
+
+/* For Mozilla */
+
+@-moz-keyframes mainMenu_ScaleFrom0To1 {
+        from {
+                /*transform*/
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -ms-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+        }
+
+        50% {
+                /*transform*/
+                -webkit-transform: scale(1.2);
+                -moz-transform: scale(1.2);
+                -ms-transform: scale(1.2);
+                -o-transform: scale(1.2);
+                transform: scale(1.2);
+        }
+
+        to {
+                /*transform*/
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -ms-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+        }
+}
+
+
+/* For Opera */
+
+@-o-keyframes mainMenu_ScaleFrom0To1 {
+        from {
+                /*transform*/
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -ms-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+        }
+
+        50% {
+                /*transform*/
+                -webkit-transform: scale(1.2);
+                -moz-transform: scale(1.2);
+                -ms-transform: scale(1.2);
+                -o-transform: scale(1.2);
+                transform: scale(1.2);
+        }
+
+        to {
+                /*transform*/
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -ms-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+        }
+}
+
+
+/* For IE */
+
+@keyframes mainMenu_ScaleFrom0To1 {
+        from {
+                /*transform*/
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -ms-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+        }
+
+        50% {
+                /*transform*/
+                -webkit-transform: scale(1.2);
+                -moz-transform: scale(1.2);
+                -ms-transform: scale(1.2);
+                -o-transform: scale(1.2);
+                transform: scale(1.2);
+        }
+
+        to {
+                /*transform*/
+                -webkit-transform: scale(1.0);
+                -moz-transform: scale(1.0);
+                -ms-transform: scale(1.0);
+                -o-transform: scale(1.0);
+                transform: scale(1.0);
+        }
+}
+
+a#playButton {
+        display: block;
+        position: absolute;
+        top: 57%;
+        left: 51%;
+        width: 7%;
+        height: 10%;
+        background-image: url(../assets/buttons/play.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        z-index: 100;
+        /*animation-name*/
+        -webkit-animation-name: playGUI_FromUpToScene;
+        -moz-animation-name: playGUI_FromUpToScene;
+        -ms-animation-name: playGUI_FromUpToScene;
+        -o-animation-name: playGUI_FromUpToScene;
+        animation-name: playGUI_FromUpToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#playButton:hover {
+        background-image: url(../assets/buttons/play_h.png);
+}
+
+span#levelTextPlaying {
+        display: block;
+        position: absolute;
+        /*
+	top:250px;
+	left:665px;
+	width:275px;
+	*/
+        top: 40%;
+        left: 35%;
+        width: 30%;
+        font-family: 'Hobo Std';
+        font-size: 3em;
+        text-align: center;
+        color: #6d4617;
+        text-decoration: none;
+        z-index: 100;
+        /*animation-name*/
+        -webkit-animation-name: playGUI_FromUpToScene;
+        -moz-animation-name: playGUI_FromUpToScene;
+        -ms-animation-name: playGUI_FromUpToScene;
+        -o-animation-name: playGUI_FromUpToScene;
+        animation-name: playGUI_FromUpToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+span#totalScorePlaying {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 25%;
+        width: 50%;
+        font-family: 'Hobo Std';
+        font-size: 1.5em;
+        text-align: center;
+        color: #6d4617;
+        text-decoration: none;
+        z-index: 100;
+        /*animation-name*/
+        -webkit-animation-name: playGUI_FromUpToScene;
+        -moz-animation-name: playGUI_FromUpToScene;
+        -ms-animation-name: playGUI_FromUpToScene;
+        -o-animation-name: playGUI_FromUpToScene;
+        animation-name: playGUI_FromUpToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#levelsPlayButton {
+        display: block;
+        position: absolute;
+        top: 57%;
+        left: 42%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/levels.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation-name*/
+        -webkit-animation-name: playGUI_FromUpToScene;
+        -moz-animation-name: playGUI_FromUpToScene;
+        -ms-animation-name: playGUI_FromUpToScene;
+        -o-animation-name: playGUI_FromUpToScene;
+        animation-name: playGUI_FromUpToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#levelsPlayButton:hover {
+        background-image: url(../assets/buttons/levels_h.png);
+}
+
+@keyframes playGUI_FromUpToScene {
+        from {
+                transform: translateY(-500px);
+                -webkit-transform: translateY(-500px);
+                -moz-transform: translateY(-500px);
+                -o-transform: translateY(-500px);
+        }
+
+        to {
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -o-transform: translateY(0px);
+                transform: translateY(0px);
+        }
+}
+
+@-moz-keyframes playGUI_FromUpToScene {
+        from {
+                transform: translateY(-500px);
+                -webkit-transform: translateY(-500px);
+                -moz-transform: translateY(-500px);
+                -o-transform: translateY(-500px);
+        }
+
+        to {
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -o-transform: translateY(0px);
+                transform: translateY(0px);
+        }
+}
+
+@-webkit-keyframes playGUI_FromUpToScene {
+        from {
+                transform: translateY(-500px);
+                -webkit-transform: translateY(-500px);
+                -moz-transform: translateY(-500px);
+                -o-transform: translateY(-500px);
+        }
+
+        to {
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -o-transform: translateY(0px);
+                transform: translateY(0px);
+        }
+}
+
+@-o-keyframes playGUI_FromUpToScene {
+        from {
+                transform: translateY(-500px);
+                -webkit-transform: translateY(-500px);
+                -moz-transform: translateY(-500px);
+                -o-transform: translateY(-500px);
+        }
+
+        to {
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -o-transform: translateY(0px);
+                transform: translateY(0px);
+        }
+}
+
+a.soundOnMenuButton {
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 35%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/sound_on.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation-name*/
+        -webkit-animation-name: mainMenu_FromDownToScene;
+        -moz-animation-name: mainMenu_FromDownToScene;
+        -ms-animation-name: mainMenu_FromDownToScene;
+        -o-animation-name: mainMenu_FromDownToScene;
+        animation-name: mainMenu_FromDownToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a.soundOnMenuButton:hover {
+        background-image: url(../assets/buttons/sound_on_h.png);
+}
+
+a.soundOffMenuButton {
+        display: block;
+        position: absolute;
+        /*
+	top:650px;
+	left:625px;
+	width:100px;
+	height:76px;
+	*/
+        top: 75%;
+        left: 35%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/sound_off.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+}
+
+a.soundOffMenuButton:hover {
+        background-image: url(../assets/buttons/sound_off_h.png);
+}
+
+a.creditsMenuButton {
+        display: block;
+        position: absolute;
+        /*
+	top:650px;
+	left:745px;
+	width:100px;
+	height:76px;
+	*/
+        top: 75%;
+        left: 45%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/credits.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation-name*/
+        -webkit-animation-name: mainMenu_FromDownToScene;
+        -moz-animation-name: mainMenu_FromDownToScene;
+        -ms-animation-name: mainMenu_FromDownToScene;
+        -o-animation-name: mainMenu_FromDownToScene;
+        animation-name: mainMenu_FromDownToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a.creditsMenuButton:hover {
+        background-image: url(../assets/buttons/credits_h.png);
+}
+
+a.howtoplayMenuButton {
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 55%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/howtoplay.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation-name*/
+        -webkit-animation-name: mainMenu_FromDownToScene;
+        -moz-animation-name: mainMenu_FromDownToScene;
+        -ms-animation-name: mainMenu_FromDownToScene;
+        -o-animation-name: mainMenu_FromDownToScene;
+        animation-name: mainMenu_FromDownToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a.howtoplayMenuButton:hover {
+        background-image: url(../assets/buttons/howtoplay_h.png);
+}
+
+@keyframes mainMenu_FromDownToScene {
+        from {
+                transform: translateY(300%);
+                -webkit-transform: translateY(300%);
+                -moz-transform: translateY(300%);
+                -o-transform: translateY(300%);
+        }
+
+        to {
+                transform: translateY(0%);
+                -webkit-transform: translateY(0%);
+                -moz-transform: translateY(0%);
+                -o-transform: translateY(0%);
+        }
+}
+
+@-webkit-keyframes mainMenu_FromDownToScene {
+        from {
+                transform: translateY(300%);
+                -webkit-transform: translateY(300%);
+                -moz-transform: translateY(300%);
+                -o-transform: translateY(300%);
+        }
+
+        to {
+                transform: translateY(0%);
+                -webkit-transform: translateY(0%);
+                -moz-transform: translateY(0%);
+                -o-transform: translateY(0%);
+        }
+}
+
+@-moz-keyframes mainMenu_FromDownToScene {
+        from {
+                transform: translateY(300%);
+                -webkit-transform: translateY(300%);
+                -moz-transform: translateY(300%);
+                -o-transform: translateY(300%);
+        }
+
+        to {
+                transform: translateY(0%);
+                -webkit-transform: translateY(0%);
+                -moz-transform: translateY(0%);
+                -o-transform: translateY(0%);
+        }
+}
+
+@-o-keyframes mainMenu_FromDownToScene {
+        from {
+                transform: translateY(300%);
+                -webkit-transform: translateY(300%);
+                -moz-transform: translateY(300%);
+                -o-transform: translateY(300%);
+        }
+
+        to {
+                transform: translateY(0%);
+                -webkit-transform: translateY(0%);
+                -moz-transform: translateY(0%);
+                -o-transform: translateY(0%);
+        }
+}
+
+a#backMenuButton {
+        display: block;
+        position: absolute;
+        /*
+	top:700px;
+	left:300px;
+	width:100px;
+	height:76px;
+	*/
+        top: 85%;
+        left: 5%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/back.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation-name*/
+        -webkit-animation-name: leftBottomButton_animation;
+        -moz-animation-name: leftBottomButton_animation;
+        -ms-animation-name: leftBottomButton_animation;
+        -o-animation-name: leftBottomButton_animation;
+        animation-name: leftBottomButton_animation;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#backMenuButton:hover {
+        background-image: url(../assets/buttons/back_h.png);
+}
+
+a#pauseMenuButton {
+        display: block;
+        position: absolute;
+        /*
+	top:700px;
+	left:300px;
+	width:100px;
+	height:76px;
+	*/
+        top: 85%;
+        left: 5%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/pause.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation-name*/
+        -webkit-animation-name: leftBottomButton_animation;
+        -moz-animation-name: leftBottomButton_animation;
+        -ms-animation-name: leftBottomButton_animation;
+        -o-animation-name: leftBottomButton_animation;
+        animation-name: leftBottomButton_animation;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#pauseMenuButton:hover {
+        background-image: url(../assets/buttons/pause_h.png);
+}
+
+@-webkit-keyframes leftBottomButton_animation {
+        from {
+                transform: translateY(450px);
+                -webkit-transform: translateY(450px);
+                -moz-transform: translateY(450px);
+                -o-transform: translateY(450px);
+        }
+
+        to {
+                transform: translateY(0px);
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -o-transform: translateY(0px);
+        }
+}
+
+@-moz-keyframes leftBottomButton_animation {
+        from {
+                transform: translateY(450px);
+                -webkit-transform: translateY(450px);
+                -moz-transform: translateY(450px);
+                -o-transform: translateY(450px);
+        }
+
+        to {
+                transform: translateY(0px);
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -o-transform: translateY(0px);
+        }
+}
+
+@-o-keyframes leftBottomButton_animation {
+        from {
+                transform: translateY(450px);
+                -webkit-transform: translateY(450px);
+                -moz-transform: translateY(450px);
+                -o-transform: translateY(450px);
+        }
+
+        to {
+                transform: translateY(0px);
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -o-transform: translateY(0px);
+        }
+}
+
+@keyframes leftBottomButton_animation {
+        from {
+                transform: translateY(450px);
+                -webkit-transform: translateY(450px);
+                -moz-transform: translateY(450px);
+                -o-transform: translateY(450px);
+        }
+
+        to {
+                transform: translateY(0px);
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -o-transform: translateY(0px);
+        }
+}
+
+a.NumbersButton {
+        display: block;
+        position: absolute;
+        font-family: 'Hobo Std';
+        font-size: 2em;
+        color: #6d4617;
+        z-index: 100;
+        text-decoration: none;
+}
+
+a.LettersButton {
+        display: block;
+        position: absolute;
+        font-family: 'Hobo Std';
+        font-size: 2em;
+        color: #6d4617;
+        z-index: 100;
+        text-decoration: none;
+}
+
+a.MixedButton {
+        display: block;
+        position: absolute;
+        font-family: 'Hobo Std';
+        font-size: 2em;
+        color: #6d4617;
+        z-index: 100;
+        text-decoration: none;
+}
+
+a.DeckButton {
+        display: block;
+        position: absolute;
+        font-family: 'Hobo Std';
+        font-size: 2em;
+        color: #6d4617;
+        z-index: 100;
+        text-decoration: none;
+}
+
+a.topSecretButton {
+        display: block;
+        position: absolute;
+        top: 700px;
+        left: 300px;
+        width: 7%;
+        height: 11%;
+        z-index: 100;
+        background-image: url(../assets/top_secret.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+}
+
+span#creditsText {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0%;
+        width: 100%;
+        font-family: 'Hobo Std';
+        font-size: 1.5em;
+        color: white;
+        text-align: center;
+        /**/
+        /*animation-name*/
+        -webkit-animation-name: creditsText_anim;
+        -moz-animation-name: creditsText_anim;
+        -ms-animation-name: creditsText_anim;
+        -o-animation-name: creditsText_anim;
+        animation-name: creditsText_anim;
+        /*animation-duration*/
+        -webkit-animation-duration: 60s;
+        -moz-animation-duration: 60s;
+        -ms-animation-duration: 60s;
+        -o-animation-duration: 60s;
+        animation-duration: 60s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-iteration-count: infinite;
+        -ms-animation-iteration-count: infinite;
+        -o-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes creditsText_anim {
+        from {
+                transform: translateY(0px);
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -o-transform: translateY(0px);
+        }
+
+        to {
+                transform: translateY(-2250px);
+                -webkit-transform: translateY(-2250px);
+                -moz-transform: translateY(-2250px);
+                -o-transform: translateY(-2250px);
+        }
+}
+
+@-moz-keyframes creditsText_anim {
+        from {
+                transform: translateY(0px);
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -o-transform: translateY(0px);
+        }
+
+        to {
+                transform: translateY(-2250px);
+                -webkit-transform: translateY(-2250px);
+                -moz-transform: translateY(-2250px);
+                -o-transform: translateY(-2250px);
+        }
+}
+
+@-o-keyframes creditsText_anim {
+        from {
+                transform: translateY(0px);
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -o-transform: translateY(0px);
+        }
+
+        to {
+                transform: translateY(-2250px);
+                -webkit-transform: translateY(-2250px);
+                -moz-transform: translateY(-2250px);
+                -o-transform: translateY(-2250px);
+        }
+}
+
+@keyframes creditsText_anim {
+        from {
+                transform: translateY(0px);
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -o-transform: translateY(0px);
+        }
+
+        to {
+                transform: translateY(-2250px);
+                -webkit-transform: translateY(-2250px);
+                -moz-transform: translateY(-2250px);
+                -o-transform: translateY(-2250px);
+        }
+}
+
+a#pkgNextButton {
+        display: block;
+        position: absolute;
+        top: 60%;
+        left: 65%;
+        width: 5%;
+        height: 5%;
+        z-index: 100;
+        background-image: url(../assets/buttons/next.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+}
+
+a#pkgNextButton:hover {
+        background-image: url(../assets/buttons/next_h.png);
+}
+
+a#pkgBackButton {
+        display: block;
+        position: absolute;
+        top: 60%;
+        left: 35%;
+        width: 5%;
+        height: 5%;
+        background-image: url(../assets/buttons/back.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+}
+
+a#pkgBackButton:hover {
+        background-image: url(../assets/buttons/back_h.png);
+}
+
+a#packageItemNumber {
+        display: block;
+        position: absolute;
+        top: 45%;
+        left: 20%;
+        width: 15%;
+        height: 35%;
+        z-index: 100;
+        /*
+	top:335px;
+	left:650px;
+	width:320px;
+	height:358px;
+	*/
+        background-image: url(../assets/packages/numbers_1.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        /*animation-name*/
+        -webkit-animation-name: package_ScaleFrom0To1;
+        -moz-animation-name: package_ScaleFrom0To1;
+        -ms-animation-name: package_ScaleFrom0To1;
+        -o-animation-name: package_ScaleFrom0To1;
+        animation-name: package_ScaleFrom0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#packageItemNumber_0 {
+        display: block;
+        position: absolute;
+        top: 45%;
+        left: 20%;
+        width: 10%;
+        height: 30%;
+        z-index: 100;
+        background-image: url(../assets/packages/numbers_0.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        /*animation-name*/
+        -webkit-animation-name: package_ScaleFrom0To1;
+        -moz-animation-name: package_ScaleFrom0To1;
+        -ms-animation-name: package_ScaleFrom0To1;
+        -o-animation-name: package_ScaleFrom0To1;
+        animation-name: package_ScaleFrom0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#packageItemLetter {
+        display: block;
+        position: absolute;
+        top: 45%;
+        left: 37.5%;
+        width: 15%;
+        height: 35%;
+        z-index: 100;
+        background-image: url(../assets/packages/letters_1.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        /*animation-name*/
+        -webkit-animation-name: package_ScaleFrom0To1;
+        -moz-animation-name: package_ScaleFrom0To1;
+        -ms-animation-name: package_ScaleFrom0To1;
+        -o-animation-name: package_ScaleFrom0To1;
+        animation-name: package_ScaleFrom0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#packageItemLetter_0 {
+        display: block;
+        position: absolute;
+        top: 45%;
+        left: 37.5%;
+        width: 15%;
+        height: 35%;
+        z-index: 100;
+        background-image: url(../assets/packages/letters_0.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        /*animation-name*/
+        -webkit-animation-name: package_ScaleFrom0To1;
+        -moz-animation-name: package_ScaleFrom0To1;
+        -ms-animation-name: package_ScaleFrom0To1;
+        -o-animation-name: package_ScaleFrom0To1;
+        animation-name: package_ScaleFrom0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#packageItemMixed {
+        display: block;
+        position: absolute;
+        top: 45%;
+        left: 55%;
+        width: 15%;
+        height: 35%;
+        z-index: 100;
+        background-image: url(../assets/packages/mixed_1.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        /*animation-name*/
+        -webkit-animation-name: package_ScaleFrom0To1;
+        -moz-animation-name: package_ScaleFrom0To1;
+        -ms-animation-name: package_ScaleFrom0To1;
+        -o-animation-name: package_ScaleFrom0To1;
+        animation-name: package_ScaleFrom0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#packageItemMixed_0 {
+        display: block;
+        position: absolute;
+        top: 45%;
+        left: 55%;
+        width: 15%;
+        height: 35%;
+        z-index: 100;
+        background-image: url(../assets/packages/mixed_0.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        /*animation-name*/
+        -webkit-animation-name: package_ScaleFrom0To1;
+        -moz-animation-name: package_ScaleFrom0To1;
+        -ms-animation-name: package_ScaleFrom0To1;
+        -o-animation-name: package_ScaleFrom0To1;
+        animation-name: package_ScaleFrom0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#packageItemDeck {
+        display: block;
+        position: absolute;
+        top: 45%;
+        left: 72.5%;
+        width: 15%;
+        height: 35%;
+        z-index: 100;
+        background-image: url(../assets/packages/deck_1.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        /*animation-name*/
+        -webkit-animation-name: package_ScaleFrom0To1;
+        -moz-animation-name: package_ScaleFrom0To1;
+        -ms-animation-name: package_ScaleFrom0To1;
+        -o-animation-name: package_ScaleFrom0To1;
+        animation-name: package_ScaleFrom0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#packageItemDeck_0 {
+        display: block;
+        position: absolute;
+        top: 45%;
+        left: 72.5%;
+        width: 15%;
+        height: 35%;
+        z-index: 100;
+        background-image: url(../assets/packages/deck_0.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        /*animation-name*/
+        -webkit-animation-name: package_ScaleFrom0To1;
+        -moz-animation-name: package_ScaleFrom0To1;
+        -ms-animation-name: package_ScaleFrom0To1;
+        -o-animation-name: package_ScaleFrom0To1;
+        animation-name: package_ScaleFrom0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+@-webkit-keyframes package_ScaleFrom0To1 {
+        from {
+                transform: scale(0.75);
+                -webkit-transform: scale(0.75);
+                -moz-transform: scale(0.75);
+                -o-transform: scale(0.75);
+                -ms-transform: scale(0.75);
+        }
+
+        to {
+                -webkit-transform: scale(1.0);
+                -moz-transform: scale(1.0);
+                -ms-transform: scale(1.0);
+                -o-transform: scale(1.0);
+                transform: scale(1.0);
+        }
+}
+
+@-moz-keyframes package_ScaleFrom0To1 {
+        from {
+                transform: scale(0.75);
+                -webkit-transform: scale(0.75);
+                -moz-transform: scale(0.75);
+                -o-transform: scale(0.75);
+                -ms-transform: scale(0.75);
+        }
+
+        to {
+                -webkit-transform: scale(1.0);
+                -moz-transform: scale(1.0);
+                -ms-transform: scale(1.0);
+                -o-transform: scale(1.0);
+                transform: scale(1.0);
+        }
+}
+
+@-o-keyframes package_ScaleFrom0To1 {
+        from {
+                transform: scale(0.75);
+                -webkit-transform: scale(0.75);
+                -moz-transform: scale(0.75);
+                -o-transform: scale(0.75);
+                -ms-transform: scale(0.75);
+        }
+
+        to {
+                -webkit-transform: scale(1.0);
+                -moz-transform: scale(1.0);
+                -ms-transform: scale(1.0);
+                -o-transform: scale(1.0);
+                transform: scale(1.0);
+        }
+}
+
+@keyframes package_ScaleFrom0To1 {
+        from {
+                transform: scale(0.75);
+                -webkit-transform: scale(0.75);
+                -moz-transform: scale(0.75);
+                -o-transform: scale(0.75);
+                -ms-transform: scale(0.75);
+        }
+
+        to {
+                -webkit-transform: scale(1.0);
+                -moz-transform: scale(1.0);
+                -ms-transform: scale(1.0);
+                -o-transform: scale(1.0);
+                transform: scale(1.0);
+        }
+}
+
+a#levelsMenuButton {
+        display: block;
+        position: absolute;
+        top: 70%;
+        left: 35%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/levels.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation-name*/
+        -webkit-animation-name: endGame_FromDownToScene;
+        -moz-animation-name: endGame_FromDownToScene;
+        -ms-animation-name: endGame_FromDownToScene;
+        -o-animation-name: endGame_FromDownToScene;
+        animation-name: endGame_FromDownToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#levelsMenuButton:hover {
+        background-image: url(../assets/buttons/levels_h.png);
+}
+
+a#retryMenuButton {
+        display: block;
+        position: absolute;
+        top: 70%;
+        left: 47.5%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/retry.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation-name*/
+        -webkit-animation-name: endGame_FromDownToScene;
+        -moz-animation-name: endGame_FromDownToScene;
+        -ms-animation-name: endGame_FromDownToScene;
+        -o-animation-name: endGame_FromDownToScene;
+        animation-name: endGame_FromDownToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#retryMenuButton:hover {
+        background-image: url(../assets/buttons/retry_h.png);
+}
+
+a#retryEndMenuButton {
+        display: block;
+        position: absolute;
+        top: 70%;
+        left: 45%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/retry.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation-name*/
+        -webkit-animation-name: endGame_FromDownToScene;
+        -moz-animation-name: endGame_FromDownToScene;
+        -ms-animation-name: endGame_FromDownToScene;
+        -o-animation-name: endGame_FromDownToScene;
+        animation-name: endGame_FromDownToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#retryEndMenuButton:hover {
+        background-image: url(../assets/buttons/retry_h.png);
+}
+
+a#resumeMenuButton {
+        display: block;
+        position: absolute;
+        top: 70%;
+        left: 60%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/play.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation-name*/
+        -webkit-animation-name: endGame_FromDownToScene;
+        -moz-animation-name: endGame_FromDownToScene;
+        -ms-animation-name: endGame_FromDownToScene;
+        -o-animation-name: endGame_FromDownToScene;
+        animation-name: endGame_FromDownToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#resumeMenuButton:hover {
+        background-image: url(../assets/buttons/play_h.png);
+}
+
+a#nextMenuButton {
+        display: block;
+        position: absolute;
+        top: 70%;
+        left: 55%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/next.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation-name*/
+        -webkit-animation-name: endGame_FromDownToScene;
+        -moz-animation-name: endGame_FromDownToScene;
+        -ms-animation-name: endGame_FromDownToScene;
+        -o-animation-name: endGame_FromDownToScene;
+        animation-name: endGame_FromDownToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#nextMenuButton:hover {
+        background-image: url(../assets/buttons/next_h.png);
+}
+
+a#retryFailedMenuButton {
+        display: block;
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/retry.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation-name*/
+        -webkit-animation-name: endGame_FromDownToScene;
+        -moz-animation-name: endGame_FromDownToScene;
+        -ms-animation-name: endGame_FromDownToScene;
+        -o-animation-name: endGame_FromDownToScene;
+        animation-name: endGame_FromDownToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#retryFailedMenuButton:hover {
+        background-image: url(../assets/buttons/retry_h.png);
+}
+
+a#levelsFailedMenuButton {
+        display: block;
+        position: absolute;
+        top: 70%;
+        left: 40%;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/levels.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        /*animation-name*/
+        -webkit-animation-name: endGame_FromDownToScene;
+        -moz-animation-name: endGame_FromDownToScene;
+        -ms-animation-name: endGame_FromDownToScene;
+        -o-animation-name: endGame_FromDownToScene;
+        animation-name: endGame_FromDownToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#levelsFailedMenuButton:hover {
+        background-image: url(../assets/buttons/levels_h.png);
+}
+
+a.soundOnAnimatedMenuButton {
+        display: block;
+        position: absolute;
+        top: 575px;
+        left: 650px;
+        width: 7%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/sound_on.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        /*animation-name*/
+        -webkit-animation-name: endGame_FromDownToScene;
+        -moz-animation-name: endGame_FromDownToScene;
+        -ms-animation-name: endGame_FromDownToScene;
+        -o-animation-name: endGame_FromDownToScene;
+        animation-name: endGame_FromDownToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a.soundOnAnimatedMenuButton:hover {
+        background-image: url(../assets/buttons/sound_on_h.png);
+}
+
+a.soundOffAnimatedMenuButton {
+        display: block;
+        position: absolute;
+        top: 575px;
+        left: 550px;
+        width: 7%;
+        z-index: 100;
+        height: 10%;
+        background-image: url(../assets/buttons/sound_off.png);
+        /*background-size*/
+        -webkit-background-size:
+                /*@@prefixmycss->No equivalent*/
+        ;
+        -moz-background-size: cover;
+        -o-background-size:
+                /*@@prefixmycss->No equivalent*/
+        ;
+        background-size: cover;
+        /*animation-name*/
+        -webkit-animation-name: endGame_FromDownToScene;
+        -moz-animation-name: endGame_FromDownToScene;
+        -ms-animation-name: endGame_FromDownToScene;
+        -o-animation-name: endGame_FromDownToScene;
+        animation-name: endGame_FromDownToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a.soundOffAnimatedMenuButton:hover {
+        background-image: url(../assets/buttons/sound_off_h.png);
+}
+
+@keyframes endGame_FromDownToScene {
+        from {
+                transform: translateY(550px);
+                -webkit-transform: translateY(550px);
+                -moz-transform: translateY(550px);
+                -o-transform: translateY(550px);
+                -ms-transform: translateY(550px);
+        }
+
+        to {
+                transform: translateY(0px);
+                -ms-transform: translateY(0px);
+                -o-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -webkit-transform: translateY(0px);
+        }
+}
+
+@-webkit-keyframes endGame_FromDownToScene {
+        from {
+                transform: translateY(550px);
+                -webkit-transform: translateY(550px);
+                -moz-transform: translateY(550px);
+                -o-transform: translateY(550px);
+                -ms-transform: translateY(550px);
+        }
+
+        to {
+                transform: translateY(0px);
+                -ms-transform: translateY(0px);
+                -o-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -webkit-transform: translateY(0px);
+        }
+}
+
+@-moz-keyframes endGame_FromDownToScene {
+        from {
+                transform: translateY(550px);
+                -webkit-transform: translateY(550px);
+                -moz-transform: translateY(550px);
+                -o-transform: translateY(550px);
+                -ms-transform: translateY(550px);
+        }
+
+        to {
+                transform: translateY(0px);
+                -ms-transform: translateY(0px);
+                -o-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -webkit-transform: translateY(0px);
+        }
+}
+
+@-o-keyframes endGame_FromDownToScene {
+        from {
+                transform: translateY(550px);
+                -webkit-transform: translateY(550px);
+                -moz-transform: translateY(550px);
+                -o-transform: translateY(550px);
+                -ms-transform: translateY(550px);
+        }
+
+        to {
+                transform: translateY(0px);
+                -ms-transform: translateY(0px);
+                -o-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                -webkit-transform: translateY(0px);
+        }
+}
+
+a.level_0_Button {
+        display: block;
+        position: absolute;
+        top: 40%;
+        left: 30%;
+        width: 8%;
+        height: 16%;
+        z-index: 100;
+        /*
+	top:550px;
+	left:550px;
+	width:135px;
+	height:150px;
+	*/
+        background-image: url(../assets/level_0.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+}
+
+a.level_1_Button {
+        display: block;
+        position: absolute;
+        top: 40%;
+        left: 30%;
+        width: 8%;
+        height: 16%;
+        z-index: 100;
+        background-image: url(../assets/level_1.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+}
+
+a.level_2_Button {
+        display: block;
+        position: absolute;
+        top: 40%;
+        left: 30%;
+        width: 8%;
+        height: 16%;
+        z-index: 100;
+        background-image: url(../assets/level_2.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+}
+
+a.level_3_Button {
+        display: block;
+        position: absolute;
+        top: 40%;
+        left: 30%;
+        width: 8%;
+        height: 16%;
+        z-index: 100;
+        background-image: url(../assets/level_3.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+}
+
+a.level_passive_Button {
+        display: block;
+        position: absolute;
+        top: 40%;
+        left: 30%;
+        width: 8%;
+        height: 16%;
+        z-index: 100;
+        background-image: url(../assets/level_passive.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+}
+
+a.levelNumberText {
+        display: block;
+        position: absolute;
+        top: 550px;
+        left: 550px;
+        width: 135px;
+        height: 150px;
+        z-index: 100;
+        font-family: 'Hobo Std';
+        font-size: 3.5em;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+}
+
+span#slogan1 {
+        display: block;
+        position: absolute;
+        top: 55%;
+        left: 40%;
+        width: 35%;
+        font-family: 'Hobo Std';
+        font-size: 1.5em;
+        color: #6d4617;
+        text-align: center;
+        text-decoration: none;
+        /*animation-name*/
+        -webkit-animation-name: howtoplay_Scale0To1;
+        -moz-animation-name: howtoplay_Scale0To1;
+        -ms-animation-name: howtoplay_Scale0To1;
+        -o-animation-name: howtoplay_Scale0To1;
+        animation-name: howtoplay_Scale0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+span#slogan2 {
+        display: block;
+        position: absolute;
+        /*
+	top:400px;
+	left:425px;
+	width:800px;
+	*/
+        top: 55%;
+        left: 25%;
+        width: 50%;
+        font-family: 'Hobo Std';
+        font-size: 1.5em;
+        color: #6d4617;
+        text-align: center;
+        text-decoration: none;
+        /*animation-name*/
+        -webkit-animation-name: howtoplay_Scale0To1;
+        -moz-animation-name: howtoplay_Scale0To1;
+        -ms-animation-name: howtoplay_Scale0To1;
+        -o-animation-name: howtoplay_Scale0To1;
+        animation-name: howtoplay_Scale0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+span#slogan3 {
+        display: block;
+        position: absolute;
+        top: 55%;
+        left: 25%;
+        width: 50%;
+        font-family: 'Hobo Std';
+        font-size: 1.5em;
+        color: #6d4617;
+        text-align: center;
+        text-decoration: none;
+        /*animation-name*/
+        -webkit-animation-name: howtoplay_Scale0To1;
+        -moz-animation-name: howtoplay_Scale0To1;
+        -ms-animation-name: howtoplay_Scale0To1;
+        -o-animation-name: howtoplay_Scale0To1;
+        animation-name: howtoplay_Scale0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+span#slogan4 {
+        display: block;
+        position: absolute;
+        top: 55%;
+        left: 25%;
+        width: 50%;
+        font-family: 'Hobo Std';
+        font-size: 1.5em;
+        color: #6d4617;
+        text-align: center;
+        text-decoration: none;
+        /*animation-name*/
+        -webkit-animation-name: howtoplay_Scale0To1;
+        -moz-animation-name: howtoplay_Scale0To1;
+        -ms-animation-name: howtoplay_Scale0To1;
+        -o-animation-name: howtoplay_Scale0To1;
+        animation-name: howtoplay_Scale0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+span#slogan5 {
+        display: block;
+        position: absolute;
+        top: 55%;
+        left: 25%;
+        width: 50%;
+        font-family: 'Hobo Std';
+        font-size: 1.5em;
+        color: #6d4617;
+        text-align: center;
+        text-decoration: none;
+        /*animation-name*/
+        -webkit-animation-name: howtoplay_Scale0To1;
+        -moz-animation-name: howtoplay_Scale0To1;
+        -ms-animation-name: howtoplay_Scale0To1;
+        -o-animation-name: howtoplay_Scale0To1;
+        animation-name: howtoplay_Scale0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+@keyframes howtoplay_Scale0To1 {
+        from {
+                transform: scale(0.1);
+                -webkit-transform: scale(0.1);
+                -moz-transform: scale(0.1);
+                -o-transform: scale(0.1);
+                -ms-transform: scale(0.1);
+        }
+
+        to {
+                transform: scale(1.0);
+                -webkit-transform: scale(1.0);
+                -moz-transform: scale(1.0);
+                -ms-transform: scale(1.0);
+                -o-transform: scale(1.0);
+        }
+}
+
+@-webkit-keyframes howtoplay_Scale0To1 {
+        from {
+                transform: scale(0.1);
+                -webkit-transform: scale(0.1);
+                -moz-transform: scale(0.1);
+                -o-transform: scale(0.1);
+                -ms-transform: scale(0.1);
+        }
+
+        to {
+                transform: scale(1.0);
+                -webkit-transform: scale(1.0);
+                -moz-transform: scale(1.0);
+                -ms-transform: scale(1.0);
+                -o-transform: scale(1.0);
+        }
+}
+
+@-moz-keyframes howtoplay_Scale0To1 {
+        from {
+                transform: scale(0.1);
+                -webkit-transform: scale(0.1);
+                -moz-transform: scale(0.1);
+                -o-transform: scale(0.1);
+                -ms-transform: scale(0.1);
+        }
+
+        to {
+                transform: scale(1.0);
+                -webkit-transform: scale(1.0);
+                -moz-transform: scale(1.0);
+                -ms-transform: scale(1.0);
+                -o-transform: scale(1.0);
+        }
+}
+
+@-ms-keyframes howtoplay_Scale0To1 {
+        from {
+                transform: scale(0.1);
+                -webkit-transform: scale(0.1);
+                -moz-transform: scale(0.1);
+                -o-transform: scale(0.1);
+                -ms-transform: scale(0.1);
+        }
+
+        to {
+                transform: scale(1.0);
+                -webkit-transform: scale(1.0);
+                -moz-transform: scale(1.0);
+                -ms-transform: scale(1.0);
+                -o-transform: scale(1.0);
+        }
+}
+
+@-o-keyframes howtoplay_Scale0To1 {
+        from {
+                transform: scale(0.1);
+                -webkit-transform: scale(0.1);
+                -moz-transform: scale(0.1);
+                -o-transform: scale(0.1);
+                -ms-transform: scale(0.1);
+        }
+
+        to {
+                transform: scale(1.0);
+                -webkit-transform: scale(1.0);
+                -moz-transform: scale(1.0);
+                -ms-transform: scale(1.0);
+                -o-transform: scale(1.0);
+        }
+}
+
+a.slogan5 {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 425px;
+        width: 800px;
+        background-image: url(../assets/buttons/next.png);
+        /*background-size*/
+        -webkit-background-size:
+                /*@@prefixmycss->No equivalent*/
+        ;
+        -moz-background-size: cover;
+        -o-background-size:
+                /*@@prefixmycss->No equivalent*/
+        ;
+        background-size: cover;
+        font-family: 'Hobo Std';
+        font-size: 1.5em;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        /*animation-name*/
+        -webkit-animation-name: howtoplay_Scale0To1;
+        -moz-animation-name: howtoplay_Scale0To1;
+        -ms-animation-name: howtoplay_Scale0To1;
+        -o-animation-name: howtoplay_Scale0To1;
+        animation-name: howtoplay_Scale0To1;
+        /*animation-duration*/
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#stepNextButton {
+        display: block;
+        position: absolute;
+        top: 80%;
+        left: 70%;
+        width: 10%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/next.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        /*animation-name*/
+        -webkit-animation-name: endGame_FromDownToScene;
+        -moz-animation-name: endGame_FromDownToScene;
+        -ms-animation-name: endGame_FromDownToScene;
+        -o-animation-name: endGame_FromDownToScene;
+        animation-name: endGame_FromDownToScene;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#stepNextButton:hover {
+        background-image: url(../assets/buttons/next_h.png);
+}
+
+a#stepBackButton {
+        display: block;
+        position: absolute;
+        top: 80%;
+        left: 20%;
+        width: 10%;
+        height: 10%;
+        z-index: 100;
+        background-image: url(../assets/buttons/back.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        /*animation-name*/
+        -webkit-animation-name: leftBottomButton_animation;
+        -moz-animation-name: leftBottomButton_animation;
+        -ms-animation-name: leftBottomButton_animation;
+        -o-animation-name: leftBottomButton_animation;
+        animation-name: leftBottomButton_animation;
+        /*animation-duration*/
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -ms-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-iteration-count: 1;
+        -ms-animation-iteration-count: 1;
+        -o-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+}
+
+a#stepBackButton:hover {
+        background-image: url(../assets/buttons/back_h.png);
+}
+
+span#hand {
+        display: block;
+        position: absolute;
+        /*
+	top:525px;
+	left:750px;
+	width:80px;
+	height:100px;
+	*/
+        top: 60%;
+        left: 45%;
+        width: 10%;
+        height: 10%;
+        background-image: url(../assets/hand.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        /*animation-name*/
+        -webkit-animation-name: handMove;
+        -moz-animation-name: handMove;
+        -ms-animation-name: handMove;
+        -o-animation-name: handMove;
+        animation-name: handMove;
+        /*animation-duration*/
+        -webkit-animation-duration: 4s;
+        -moz-animation-duration: 4s;
+        -ms-animation-duration: 4s;
+        -o-animation-duration: 4s;
+        animation-duration: 4s;
+        /*animation-iteration-count*/
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-iteration-count: infinite;
+        -ms-animation-iteration-count: infinite;
+        -o-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+}
+
+@keyframes handMove {
+        from {
+                transform: translate(0px, 0px);
+                -webkit-transform: translate(0px, 0px);
+                -moz-transform: translate(0px, 0px);
+                -o-transform: translate(0px, 0px);
+                -ms-transform: translate(0px, 0px);
+        }
+
+        25% {
+                transform: translate(-115px, 60px);
+                -webkit-transform: translate(-115px, 60px);
+                -moz-transform: translate(-115px, 60px);
+                -o-transform: translate(-115px, 60px);
+                -ms-transform: translate(-115px, 60px);
+        }
+
+        50% {
+                transform: translate(25px, 135px);
+                -webkit-transform: translate(25px, 135px);
+                -moz-transform: translate(25px, 135px);
+                -ms-transform: translate(25px, 135px);
+                -o-transform: translate(25px, 135px);
+        }
+
+        75% {
+                transform: translate(185px, 105px);
+                -webkit-transform: translate(185px, 105px);
+                -moz-transform: translate(185px, 105px);
+                -ms-transform: translate(185px, 105px);
+                -o-transform: translate(185px, 105px);
+        }
+
+        to {
+                transform: translate(0px, 0px);
+                -webkit-transform: translate(0px, 0px);
+                -moz-transform: translate(0px, 0px);
+                -o-transform: translate(0px, 0px);
+                -ms-transform: translate(0px, 0px);
+        }
+}
+
+@-webkit-keyframes handMove {
+        from {
+                transform: translate(0px, 0px);
+                -webkit-transform: translate(0px, 0px);
+                -moz-transform: translate(0px, 0px);
+                -o-transform: translate(0px, 0px);
+                -ms-transform: translate(0px, 0px);
+        }
+
+        25% {
+                transform: translate(-115px, 60px);
+                -webkit-transform: translate(-115px, 60px);
+                -moz-transform: translate(-115px, 60px);
+                -o-transform: translate(-115px, 60px);
+                -ms-transform: translate(-115px, 60px);
+        }
+
+        50% {
+                transform: translate(25px, 135px);
+                -webkit-transform: translate(25px, 135px);
+                -moz-transform: translate(25px, 135px);
+                -ms-transform: translate(25px, 135px);
+                -o-transform: translate(25px, 135px);
+        }
+
+        75% {
+                transform: translate(185px, 105px);
+                -webkit-transform: translate(185px, 105px);
+                -moz-transform: translate(185px, 105px);
+                -ms-transform: translate(185px, 105px);
+                -o-transform: translate(185px, 105px);
+        }
+
+        to {
+                transform: translate(0px, 0px);
+                -webkit-transform: translate(0px, 0px);
+                -moz-transform: translate(0px, 0px);
+                -o-transform: translate(0px, 0px);
+                -ms-transform: translate(0px, 0px);
+        }
+}
+
+@-moz-keyframes handMove {
+        from {
+                transform: translate(0px, 0px);
+                -webkit-transform: translate(0px, 0px);
+                -moz-transform: translate(0px, 0px);
+                -o-transform: translate(0px, 0px);
+                -ms-transform: translate(0px, 0px);
+        }
+
+        25% {
+                transform: translate(-115px, 60px);
+                -webkit-transform: translate(-115px, 60px);
+                -moz-transform: translate(-115px, 60px);
+                -o-transform: translate(-115px, 60px);
+                -ms-transform: translate(-115px, 60px);
+        }
+
+        50% {
+                transform: translate(25px, 135px);
+                -webkit-transform: translate(25px, 135px);
+                -moz-transform: translate(25px, 135px);
+                -ms-transform: translate(25px, 135px);
+                -o-transform: translate(25px, 135px);
+        }
+
+        75% {
+                transform: translate(185px, 105px);
+                -webkit-transform: translate(185px, 105px);
+                -moz-transform: translate(185px, 105px);
+                -ms-transform: translate(185px, 105px);
+                -o-transform: translate(185px, 105px);
+        }
+
+        to {
+                transform: translate(0px, 0px);
+                -webkit-transform: translate(0px, 0px);
+                -moz-transform: translate(0px, 0px);
+                -o-transform: translate(0px, 0px);
+                -ms-transform: translate(0px, 0px);
+        }
+}
+
+@-o-keyframes handMove {
+        from {
+                transform: translate(0px, 0px);
+                -webkit-transform: translate(0px, 0px);
+                -moz-transform: translate(0px, 0px);
+                -o-transform: translate(0px, 0px);
+                -ms-transform: translate(0px, 0px);
+        }
+
+        25% {
+                transform: translate(-115px, 60px);
+                -webkit-transform: translate(-115px, 60px);
+                -moz-transform: translate(-115px, 60px);
+                -o-transform: translate(-115px, 60px);
+                -ms-transform: translate(-115px, 60px);
+        }
+
+        50% {
+                transform: translate(25px, 135px);
+                -webkit-transform: translate(25px, 135px);
+                -moz-transform: translate(25px, 135px);
+                -ms-transform: translate(25px, 135px);
+                -o-transform: translate(25px, 135px);
+        }
+
+        75% {
+                transform: translate(185px, 105px);
+                -webkit-transform: translate(185px, 105px);
+                -moz-transform: translate(185px, 105px);
+                -ms-transform: translate(185px, 105px);
+                -o-transform: translate(185px, 105px);
+        }
+
+        to {
+                transform: translate(0px, 0px);
+                -webkit-transform: translate(0px, 0px);
+                -moz-transform: translate(0px, 0px);
+                -o-transform: translate(0px, 0px);
+                -ms-transform: translate(0px, 0px);
+        }
+}
+
+@-ms-keyframes handMove {
+        from {
+                transform: translate(0px, 0px);
+                -webkit-transform: translate(0px, 0px);
+                -moz-transform: translate(0px, 0px);
+                -o-transform: translate(0px, 0px);
+                -ms-transform: translate(0px, 0px);
+        }
+
+        25% {
+                transform: translate(-115px, 60px);
+                -webkit-transform: translate(-115px, 60px);
+                -moz-transform: translate(-115px, 60px);
+                -o-transform: translate(-115px, 60px);
+                -ms-transform: translate(-115px, 60px);
+        }
+
+        50% {
+                transform: translate(25px, 135px);
+                -webkit-transform: translate(25px, 135px);
+                -moz-transform: translate(25px, 135px);
+                -ms-transform: translate(25px, 135px);
+                -o-transform: translate(25px, 135px);
+        }
+
+        75% {
+                transform: translate(185px, 105px);
+                -webkit-transform: translate(185px, 105px);
+                -moz-transform: translate(185px, 105px);
+                -ms-transform: translate(185px, 105px);
+                -o-transform: translate(185px, 105px);
+        }
+
+        to {
+                transform: translate(0px, 0px);
+                -webkit-transform: translate(0px, 0px);
+                -moz-transform: translate(0px, 0px);
+                -o-transform: translate(0px, 0px);
+                -ms-transform: translate(0px, 0px);
+        }
+}
