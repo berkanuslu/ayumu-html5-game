@@ -1,1 +1,2 @@
-./js/*.js linguist-language=Javascript
+css/* linguist-vendored
+assets/* linguist-vendored
